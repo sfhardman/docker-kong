@@ -18,11 +18,10 @@ RUN set -ex \
       && curl -fL https://download.konghq.com/gateway-${KONG_VERSION%%.*}.x-ubuntu-$(cat /etc/os-release | grep UBUNTU_CODENAME | cut -d = -f 2)/pool/all/k/kong/kong_${KONG_VERSION}_$(dpkg --print-architecture).deb -o /tmp/kong.deb \
       && apt-get purge -y curl; \
     fi; \
-    apt-get install -y --no-install-recommends unzip git \
     # Please update the ubuntu install docs if the below line is changed so that
     # end users can properly install Kong along with its required dependencies
     # and that our CI does not diverge from our docs.
-    && apt install --yes /tmp/kong.deb \
+    apt install --yes /tmp/kong.deb \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/kong.deb \
     && chown kong:0 /usr/local/bin/kong \
