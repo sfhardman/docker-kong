@@ -26,6 +26,8 @@ file_env() {
   unset "$fileVar"
 }
 
+sed -i "s/lua_max_running_timers 4096/lua_max_running_timers ${KONG_MAX_RUNNING_TIMERS}/g" /usr/local/share/lua/5.1/kong/templates/nginx_kong.lua
+
 export KONG_NGINX_DAEMON=${KONG_NGINX_DAEMON:=off}
 
 if [[ "$1" == "kong" ]]; then
