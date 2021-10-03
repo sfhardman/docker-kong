@@ -28,6 +28,9 @@ file_env() {
 
 export KONG_NGINX_DAEMON=${KONG_NGINX_DAEMON:=off}
 
+sed -i "s/lua_max_running_timers 4096/lua_max_running_timers ${KONG_MAX_RUNNING_TIMERS}/g" /usr/local/share/lua/5.1/kong/templates/nginx_kong.lua
+
+
 if [[ "$1" == "kong" ]]; then
 
   all_kong_options="/usr/local/share/lua/5.1/kong/templates/kong_defaults.lua"
